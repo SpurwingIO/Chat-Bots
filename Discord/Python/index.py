@@ -12,7 +12,7 @@ db = load_db()
 
 # Bot declaration
 client = discord.Client()
-bot = commands.Bot(commands_prefix='$')
+bot = commands.Bot(command_prefix='$')
 
 @bot.command()
 async def test(ctx, arg):
