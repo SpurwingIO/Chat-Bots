@@ -15,4 +15,4 @@ async def on_message(message):
     if message.content.startswith('!help'):
         await message.channel.send('Commands:')
 
-client.run(os.getenv('TOKEN'))
+client.run('TOKEN')
