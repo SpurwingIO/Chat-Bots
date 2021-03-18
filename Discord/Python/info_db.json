@@ -1,0 +1,8 @@
+{
+  "_comments": "Change following fields with actual information",
+  
+  "token": "bot token goes here",
+  "client_id": "bot client id goes here",
+  "bots_key": "bot key goes here",
+  "prefix": "$",
+}
