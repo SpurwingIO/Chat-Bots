@@ -5,7 +5,7 @@ from discord.ext import commands
 
 # JSON load
 def load_db():
-    with open('db.json') as db:
+    with open("db.json") as db:
         return json.load(db)
     
 # Load database
