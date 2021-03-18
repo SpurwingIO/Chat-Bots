@@ -1,7 +1,22 @@
+import json
 import discord
-import os
+from discord.ext import commands
 
-client = discord.Client()
+# JSON load
+def load_db():
+    with open('db.json') as db:
+        return json.load(db)
+    
+# Load database
+db = load_db()
+
+# Bot declaration
+#client = discord.Client()
+bot = commands.Bot(commands_prefix='$')
+
+@bot.command()
+async def test(ctx, arg):
+    await ctx.send(arg) 
 
 @client.event
 async def on_ready():
@@ -14,5 +29,6 @@ async def on_message(message):
 
     if message.content.startswith('!help'):
         await message.channel.send('Commands:')
-
-client.run('TOKEN')
+        
+#client.run(db['token'])
+bot.run(db['token'])
