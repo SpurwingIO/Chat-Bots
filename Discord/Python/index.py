@@ -11,7 +11,7 @@ def load_db():
 db = load_db()
 
 # Bot declaration
-#client = discord.Client()
+client = discord.Client()
 bot = commands.Bot(commands_prefix='$')
 
 @bot.command()
