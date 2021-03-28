@@ -1,5 +1,6 @@
 # Facebook Messenger Chat Bot with Spurwing API
 
+![Simple Appointment Scheduling Demo for Facebook Messenger Chat Bots](assets/fbchat.png)
 
 ## Intro
 This is a demo project show casing the integration of Spurwing with Facebook Messenger API for chat bot programming.
@@ -16,8 +17,6 @@ This is a demo project show casing the integration of Spurwing with Facebook Mes
 - Rename `config.sample.js` to `config.js` and provide the required credentials.
 - Adjust the Express Router Endpoints if necessary in `index.js`
 - Start the chat bot service: `node index.js`
-
-![Simple Appointment Scheduling Demo for Facebook Messenger Chat Bots](NodeJS/assets/fbchat.png)
 
 ## Development
 - All date and times are relative to the hosting server, and not relative to the user's timezone. Facebook has advanced messaging features which you can request access for to receive the user's actual timezone.
