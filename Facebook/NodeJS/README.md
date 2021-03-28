@@ -3,7 +3,7 @@
 ![Simple Appointment Scheduling Demo for Facebook Messenger Chat Bots](assets/fbchat.png)
 
 ## Intro
-This is a demo project show casing the integration of Spurwing with Facebook Messenger API for chat bot programming.
+This is a demo project showcasing the integration of Spurwing with Facebook Messenger API for chat bot programming.
 
 ## Requirements
 - A web server with a public URL (domain name or ip address)
