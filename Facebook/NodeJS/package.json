@@ -13,6 +13,8 @@
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-slash": "^2.0.1",
-    "request": "^2.88.2"
+    "moment": "^2.29.1",
+    "request": "^2.88.2",
+    "spurwing": "^1.0.5"
   }
 }
