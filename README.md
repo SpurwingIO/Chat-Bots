@@ -11,3 +11,8 @@ This repostitory contains demos, tutorials and frameworks for integrating Appoin
 - [ ] Intercom
 - [ ] Google Chat
 - [ ] Amazon Lex
+
+## Support
+- For public issues and bugs please use the GitHub Issues Page.
+- For enquiries and private issues reach out to us at support@spurwing.io
+- Join our Discord Community Server: https://discord.gg/j3gd5Qk5uW
