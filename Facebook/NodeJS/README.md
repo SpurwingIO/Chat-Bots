@@ -23,3 +23,7 @@ This is a demo project showcasing the integration of Spurwing with Facebook Mess
 - Alternatively you can ask the user's timezone in the chat yourself.
 - The number of quick reply buttons is limited. But the number of available days and/or time slots can exceed this limit. Custom logic should be implemented to provide more flexibile scheduling options.
 
+## Support
+- For public issues and bugs please use the GitHub Issues Page.
+- For enquiries and private issues reach out to us at support@spurwing.io
+- Join our Discord Community Server: https://discord.gg/j3gd5Qk5uW
