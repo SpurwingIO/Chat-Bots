@@ -1,23 +1,14 @@
-import json
 import os
 import discord
 from discord.ext import commands
+from spurwing import Client as sp
 
-# JSON load
-def load_db():
-    with open("db.json") as db:
-        return json.load(db)
-    
-# Load database
-db = load_db()
 
-# Bot declaration
 client = discord.Client()
-bot = commands.Bot(command_prefix='$')
-
-@bot.command()
-async def test(ctx, arg):
-    await ctx.send(arg) 
+PID = 'PID'
+KEY = 'KEY'
+appointTypes = sp.get_appointment_types(PID)
+appointment_type_id = appointTypes[0]['id']
 
 @client.event
 async def on_ready():
@@ -28,8 +19,62 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!help'):
+    if message.content.lower().startswith('!help'):
         await message.channel.send('Commands:')
+        await message.channel.send('To book an appointment: !Appointment MM/DD/YYYY')
+
+    if message.content.lower().startswith('!adays'):
+        await message.channel.send('Available Days for scheduling')
+        days = sp.get_days_available(PID, appointment_type_id)
+        for x in range(5):
+            if x > len(days['days_available']):
+                break
+            await message.channel.send(days['days_available'][x])
+
+    if message.content.lower().startswith('!aslots'):
+        cmd = message.content.split()
+        if(len(cmd) != 3):
+            await message.channel.send('Invalid command format')
+            await message.channel.send('Please enter !aslots followed by start date and end date in form MM/DD/YYYY')
+            return
+        #TO ADD: Date parse to input to get correct slots.
+        slots = sp.get_slots_available(PID, appointment_type_id, '2021-04-06', '2021-04-07')
+        for x in range(5):
+            if x > len(slots['slots_available']):
+                break
+            await message.channel.send(slots['slots_available'][x]['date'])
+    
+    if message.content.lower().startswith('!appointment'):
+        cmd = message.content.split()
+        if(len(cmd) < 2 or len(cmd) > 2):
+            await message.channel.send('Invalid Appointment Schedule')
+            await message.channel.send('To make an appointment, please enter as !Appointment MM/DD/YYYY')
+            return
+        else:
+            date = cmd[1]
+            MonDayYear = date.split('/')
+            if(len(MonDayYear) != 3):
+                await message.channel.send('Invalid Date format. Enter as MM/DD/YYYY')
+                return
+            try:
+                Month = int(MonDayYear[0])
+                if(Month < 1 or Month > 12):
+                    await message.channel.send('Invalid Month. Month values can only by 1-12')
+                    return
+                Day = int(MonDayYear[1])
+                if(Day < 1 or Day > 31):
+                     await message.channel.send('Invalid Day. Day values can only by 1-31')
+                     return
+                Year = int(MonDayYear[2])
+                if(len(str(Year)) != 4):
+                    await message.channel.send('Invalid Year. Years are 4 digits long')
+                    return
+            except:
+                await message.channel.send('Invalid Date format. Enter as MM/DD/YYYY')
+                return
+            await message.channel.send('Appointment to be booked for:')
+            await message.channel.send(date)
+            #TO DO: Add actual scheduling into Spurwing API
+            
         
-#client.run(db['token'])
-bot.run(db["token"])
+client.run('TOKEN')
