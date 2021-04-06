@@ -43,6 +43,16 @@ async def on_message(message):
             if x > len(slots['slots_available']):
                 break
             await message.channel.send(slots['slots_available'][x]['date'])
+            
+    
+    if message.content.lower().startswith('!booked'):
+        booked = sp.list_appointments(KEY, 1000, 0)
+        if(booked['data']['appointmentsCount'] == 0):
+            await message.channel.send('No Appointments.')
+        else:
+            print("hit")
+            for i in range(booked['data']['appointmentsCount']):
+                await message.channel.send(booked['data']['appointments'][i])
     
     if message.content.lower().startswith('!appointment'):
         cmd = message.content.split()
