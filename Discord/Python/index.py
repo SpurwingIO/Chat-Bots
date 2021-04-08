@@ -2,7 +2,7 @@ import os
 import discord
 from discord.ext import commands
 from spurwing import Client as sp
-
+import dateparser
 
 client = discord.Client()
 PID = 'PID'
@@ -37,14 +37,22 @@ async def on_message(message):
             await message.channel.send('Invalid command format')
             await message.channel.send('Please enter !aslots followed by start date and end date in form MM/DD/YYYY')
             return
-        #TO ADD: Date parse to input to get correct slots.
-        slots = sp.get_slots_available(PID, appointment_type_id, '2021-04-06', '2021-04-07')
+        date1 = cmd[1]
+        date2 = cmd[2]
+        parsed = dateparser.parse(date1)
+        if parsed == None:
+            await message.channel.send('Unable to parse start date.')
+        parsed2 = dateparser.parse(date2)
+        if parsed2 == None:
+            await message.channel.send('Unable to parse end date.')
+        start = str(parsed.year) + '-' + str(parsed.month) + '-' + str(parsed.day)
+        end = str(parsed2.year) + '-' + str(parsed2.month) + '-' + str(parsed2.day)
+        slots = sp.get_slots_available(PID, appointment_type_id, start, end)
         for x in range(5):
             if x > len(slots['slots_available']):
-                break
+                return
             await message.channel.send(slots['slots_available'][x]['date'])
-            
-    
+
     if message.content.lower().startswith('!booked'):
         booked = sp.list_appointments(KEY, 1000, 0)
         if(booked['data']['appointmentsCount'] == 0):
@@ -83,7 +91,7 @@ async def on_message(message):
                 return
             await message.channel.send('Appointment to be booked for:')
             await message.channel.send(date)
-            #TO DO: Add actual scheduling into Spurwing API
             
         
 client.run('TOKEN')
+
