@@ -22,6 +22,7 @@ async def on_message(message):
     if message.content.lower().startswith('!help'):
         await message.channel.send('Commands:')
         await message.channel.send('To book an appointment: !Appointment MM/DD/YYYY')
+        await message.channel.send('To see booked appointments type in !booked')
 
     if message.content.lower().startswith('!adays'):
         await message.channel.send('Available Days for scheduling')
@@ -48,6 +49,8 @@ async def on_message(message):
         start = str(parsed.year) + '-' + str(parsed.month) + '-' + str(parsed.day)
         end = str(parsed2.year) + '-' + str(parsed2.month) + '-' + str(parsed2.day)
         slots = sp.get_slots_available(PID, appointment_type_id, start, end)
+        if(len(slots['slots_available']) == 0):
+            return
         for x in range(5):
             if x > len(slots['slots_available']):
                 return
@@ -62,35 +65,31 @@ async def on_message(message):
                 await message.channel.send(booked['data']['appointments'][i])
     
     if message.content.lower().startswith('!appointment'):
-        cmd = message.content.split()
-        if(len(cmd) < 2 or len(cmd) > 2):
-            await message.channel.send('Invalid Appointment Schedule')
-            await message.channel.send('To make an appointment, please enter as !Appointment MM/DD/YYYY')
+        cmd = message.content.split(" ", 1)
+        if(len(cmd) != 2):
+            await message.channel.send('Invalid command format')
             return
-        else:
-            date = cmd[1]
-            MonDayYear = date.split('/')
-            if(len(MonDayYear) != 3):
-                await message.channel.send('Invalid Date format. Enter as MM/DD/YYYY')
+        parsed = dateparser.parse(cmd[1])
+        if parsed == None:
+            await message.channel.send('Invalid Date format')
+            return
+        date =  str(parsed.year) + '-' + str(parsed.month) + '-' + str(parsed.day)
+        slots = sp.get_slots_available(PID, appointment_type_id, date, date)
+        for x in range(len(slots['slots_available'])):
+            slotObj = slots['slots_available'][x]['date']
+            time = slotObj.split()
+            if(time[1] == parsed.strftime('%H:%M:%S')):
+                slot = slots['slots_available'][x]['date']
+                apt = sp.complete_booking(PID, appointment_type_id, 'test@spurwing.io', 'appt', 'book', date=slot, contact_type='My Contact Type')
+                await message.channel.send('appointment booked successfully')
                 return
-            try:
-                Month = int(MonDayYear[0])
-                if(Month < 1 or Month > 12):
-                    await message.channel.send('Invalid Month. Month values can only by 1-12')
-                    return
-                Day = int(MonDayYear[1])
-                if(Day < 1 or Day > 31):
-                     await message.channel.send('Invalid Day. Day values can only by 1-31')
-                     return
-                Year = int(MonDayYear[2])
-                if(len(str(Year)) != 4):
-                    await message.channel.send('Invalid Year. Years are 4 digits long')
-                    return
-            except:
-                await message.channel.send('Invalid Date format. Enter as MM/DD/YYYY')
-                return
-            await message.channel.send('Appointment to be booked for:')
-            await message.channel.send(date)
+        await message.channel.send('Unable to book appointment.')
+        
+            
+              
+        
+            
+
             
         
 client.run('TOKEN')
