@@ -1,22 +1,36 @@
 import { RTMClient } from '@slack/rtm-api';
 require('dotenv').config();
-import sendMessage from './core-commands/sendMessage.js';
 
-const PREFIX = '!';
+// command function imports
+import sendMessage from './core-commands/sendMessage.js';
+import bookAppointment from './core-commands/bookAppointment.js';
+
+const PREFIX = process.env.PREFIX;
 
 const rtm = new RTMClient(process.env.TOKEN);
 
 // commands
-rtm.on('slack_event', async (eType, e) => {
-    console.log(e); // debug
-    console.log(eType); // debug
+rtm.on('message', async message => {
+    console.log(message); // debug
+
+    // pull the prefix, command names and args
+    if(!message.text.startsWith(`${PREFIX}`)) return;
+    let args = message.text.slice(PREFIX.length).trim().split(/ +/);
+    let commandName = args.shift().toLowerCase();
 
     // commands list on message
-    if(e && e.type === 'message') {
-        switch(e.text) {
-            case `${PREFIX}hi`:
-                return sendMessage(e.channel, `Hello <@${e.user}>`);
-        }
+    switch(commandName) {
+        case `ping`:
+            return sendMessage(message.channel, 'pong');
+
+        // below commands are not made yet but will be implemented soon.
+        case `book`:
+            return bookAppointment(message, args);
+        case `cancel`:
+            return cancelAppointment(message, args);
+        case `opentimes`:
+            return openTimes(message, args);
+        // above commands are not made yet but will be implemented soon.
     }
 });
 

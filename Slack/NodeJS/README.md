@@ -14,20 +14,25 @@
 
 5. Create a new file named `.env`.
 
-6. Add this to the file: `TOKEN="replace this"`.
+6. Add this to the file: 
 
-7. On the slack site, click on your bot and on the left tab, click on "App Home".
+```js
+TOKEN="replace this"
+PREFIX="replace this"
+```
 
-8. Add the bot on the second box.
+1. On the slack site, click on your bot and on the left tab, click on "App Home".
 
-9. Go to "OAuth & Permissions" on the left tab.
+2.  Add the bot on the second box.
 
-10. Add the bot with those scopes (classic doesn't allow for fancy customization).
+3.  Go to "OAuth & Permissions" on the left tab.
 
-11. Copy the "Bot User Oauth Token".
+4.   Add the bot with those scopes (classic doesn't allow for fancy customization).
 
-12. Replace the `replace this` with your token.
+5.   Copy the "Bot User Oauth Token".
 
-13. Type `npm run server`.
+6.   Replace the `replace this` with your token, and prefix respectively.
+
+7.   Type `npm run server`.
 
 Your bot should be online. If it throws an error immediately, feel free to remove the line `sendMessage('chat-bot', 'Bot is now online.');` in app.js. This will probably break something if you do not already have a channel in your Slack with the name chat-bot.
