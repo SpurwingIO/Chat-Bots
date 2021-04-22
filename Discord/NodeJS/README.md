@@ -7,6 +7,8 @@ Discord has for many years been popular in the gaming community. But due to the 
 
 YouTube Demo: https://www.youtube.com/watch?v=e5SpHXVMlKw
 
+You can join our Discord server and try this bot yourself: https://discord.gg/j3gd5Qk5uW
+
 ## Intro
 We love Discord at Spurwing, it provides all features we need for free: text and voice channels, video calls, video conferencing, screen sharing and recently the addition of stage channels. You can emulate an **office experience** with these channels, an ideal solution for a conservative managers.
 
@@ -95,6 +97,13 @@ You: maybe we should meet again next week?
 
 Bot: Would you like to schedule for next week this time?
 ```
+
+## Support
+
+- For public issues and bugs please use the GitHub Issues Page.
+- For enquiries and private issues reach out to us at support@spurwing.io
+- Join our Discord Community Server: https://discord.gg/j3gd5Qk5uW
+
 
 # Conclusion
 Another cool UX improvement to the `!book [slot] ...` command is to make return a few bookable slots if it fails to schedule for the `[slot]` you provided.
