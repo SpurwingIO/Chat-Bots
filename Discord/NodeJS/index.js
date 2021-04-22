@@ -69,22 +69,24 @@ async function fBook(cmd, name) {
 }
 async function fDaysAvail(cmd) {
   cmd = cmd.match(rDaysAvail)[1];
-  if (!cmd) cmd = (new Date()).toISOString();
+  if (!cmd) cmd = (new Date()).toISOString(); // use 'now' if no date provided
   let dt = chrono.parseDate(cmd);
   if (!dt) return ('Unable to interpret date from: ' + cmd);
   const days = await sp.get_days_available(config.PID, APTID, dt);
   if (days.days_available && days.days_available.length)
-    return days.days_available.join('\n')
+    return 'Available days in ' + dt.toLocaleString('en', {month:'long'}) + ':\n\n' + days.days_available.join('\n')
   else
-    return 'no days available that month'
+    return 'no days available in ' + dt.toLocaleString('en', {month:'long'})
 }
 async function fSlotsAvail(cmd) {
   cmd = cmd.match(rSlotsAvail)[1];
-  if (!cmd) cmd = (new Date()).toISOString();
+  if (!cmd) cmd = (new Date()).toISOString(); // use 'now' if no date provided
   let dt = chrono.parseDate(cmd);
   if (!dt) return ('Unable to interpret date from: ' + cmd);
+
+  // if timezone provided try extracting it
   let dtx = chrono.parse(cmd);
-  let tz = null;
+  let tz = null; // timezone used for returning relative time slots
   if (dtx[0].start && dtx[0].start.knownValues && dtx[0].start.knownValues.timezoneOffset) {
     let offset = -dtx[0].start.knownValues.timezoneOffset;
     tz = tzMap.get(offset)
@@ -92,9 +94,9 @@ async function fSlotsAvail(cmd) {
   }
   const slots = await sp.get_slots_available(config.PID, APTID, dt, dt, false, tz);
   if (slots.slots_available && slots.slots_available.length)
-    return slots.slots_available.map(x=>x.date).join('\n')
+    return 'available slots on '+moment(dt.getTime()).format('YYYY-MM-DD HH:mm Z') +' :\n\n' + slots.slots_available.map(x=>x.date).join('\n');
   else
-    return 'no slots available that day'
+    return 'no slots available on ' + moment(dt.getTime()).format('YYYY-MM-DD HH:mm Z');
 }
 
 // mapping offsets to timezones:
