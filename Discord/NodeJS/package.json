@@ -10,6 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "chrono-node": "^2.2.6",
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "spurwing": "^1.0.6-patch"
   }
 }

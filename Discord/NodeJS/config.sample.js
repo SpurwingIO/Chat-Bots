@@ -1,3 +1,5 @@
 module.exports = {
-  token: "",
+  token: '',
+  PID: '',
+  APTID: '',
 }
