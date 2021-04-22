@@ -22,6 +22,7 @@ client.on('ready', () => {
 });
 
 // regular expressions for commands
+const rHelp = /^help$/;
 const rBook = /^book (.+)$/;        // arg: datetime + email
 const rDaysAvail = /^days( .+)?$/;   // arg: month (of date)
 const rSlotsAvail = /^slots( .+)?$/; // arg: day (of date)
@@ -34,6 +35,12 @@ client.on('message', async function(msg) {
   const cmd = msg.content.slice(prefix.length);
   let reply;
   switch(true) {
+    case rHelp.test(cmd):
+      reply = 'Available commands:\n\n'
+      reply += '!days [date]      get available days in month of [date]\n'
+      reply += '!slots [date]     get bookable slots on [date]\n'
+      reply += '!book [slot] [@]  book appointment with [@] on [slot]\n'
+      break;
     case rDaysAvail.test(cmd):
       reply = await fDaysAvail(cmd)
       break;
