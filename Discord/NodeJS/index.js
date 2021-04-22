@@ -14,9 +14,9 @@ if (!APTID) {
   });
 }
 
-const client = new Discord.Client(); 
 const prefix = '!';
-
+const client = new Discord.Client();
+client.login(config.token);
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
 });
@@ -61,7 +61,7 @@ async function fBook(cmd, name) {
   let out;
   try {
     out = await sp.complete_booking(config.PID, APTID, email, name, '-', dt, 'Discord Appointment')
-    return 'wohoo!' + `\n\nSlot: ${moment(dt.getTime()).format('YYYY-MM-DD HH:mm Z')}`
+    return 'Success!' + `\n\nSlot: ${moment(dt.getTime()).format('YYYY-MM-DD HH:mm Z')}`
   } catch (err) {
     if (err && err.response && err.response.data)
       return 'Error:\n' + err.response.data.message + `\n\nSlot: ${moment(dt.getTime()).format('YYYY-MM-DD HH:mm Z')}`
@@ -97,7 +97,8 @@ async function fSlotsAvail(cmd) {
     return 'no slots available that day'
 }
 
-const tzMap = new Map(); // offset to timezone name mapping
+// mapping offsets to timezones:
+const tzMap = new Map();
 for (const name of moment.tz.names()) {
   const offsets = moment.tz.zone(name).offsets;
   
@@ -109,8 +110,8 @@ for (const name of moment.tz.names()) {
   }
 }
 
-
+// testing stuff
 // fDaysAvail('days april 22').then(console.log);
 // fSlotsAvail('slots tomorrow 10am edt').then(console.log);
 // fBook('book 2021-04-23 03:00:00 -0400 ilya@nevolin.be').then(console.log)
-client.login(config.token);
+
