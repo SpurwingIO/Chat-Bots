@@ -36,10 +36,7 @@ client.on('message', async function(msg) {
   let reply;
   switch(true) {
     case rHelp.test(cmd):
-      reply = 'Available commands:\n\n'
-      reply += '!days [date]      get available days in month of [date]\n'
-      reply += '!slots [date]     get bookable slots on [date]\n'
-      reply += '!book [slot] [@]  book appointment with [@] on [slot]\n'
+      reply = fHelp()
       break;
     case rDaysAvail.test(cmd):
       reply = await fDaysAvail(cmd)
@@ -54,9 +51,18 @@ client.on('message', async function(msg) {
       reply = ('Invalid command, unable to process.')
       break;
   }
-  msg.reply('\n```' + reply + '```')
+  msg.channel.send(reply)
 });
 
+function fHelp() {
+  return new Discord.MessageEmbed()
+    .setColor('#40ff00')
+    .setTitle('Available commands:')
+    .addField('!days [date]', 'get available days in month of [date]', true)
+    .addField('!slots [date]', 'get bookable slots on [date]', true)
+    .addField('!book [slot] [@]', 'book appointment with [@] on [slot]', true)
+    .setFooter('spurwing.io');
+}
 async function fBook(cmd, name) {
   cmd = cmd.match(rBook)[1];
   if (!rEmail.test(cmd)) return ('Missing or invalid email address');
@@ -68,10 +74,23 @@ async function fBook(cmd, name) {
   let out;
   try {
     out = await sp.complete_booking(config.PID, APTID, email, name, '-', dt, 'Discord Appointment')
-    return 'Success!' + `\n\nSlot: ${moment(dt.getTime()).format('YYYY-MM-DD HH:mm Z')}`
+    return new Discord.MessageEmbed()
+      .setColor('#0099ff')
+      .setTitle('Success!')
+      .setDescription(`Slot: ${moment(dt.getTime()).format('YYYY-MM-DD HH:mm')}`+ '\n' + 'Timezone offset: ' + moment(dt.getTime()).format('Z'))
+      .setFooter('spurwing.io');
   } catch (err) {
-    if (err && err.response && err.response.data)
-      return 'Error:\n' + err.response.data.message + `\n\nSlot: ${moment(dt.getTime()).format('YYYY-MM-DD HH:mm Z')}`
+    if (err && err.response && err.response.data) {
+      return new Discord.MessageEmbed()
+        .setColor('#ff0033')
+        .setDescription(`${err.response.data.message} \nSlot: ${moment(dt.getTime()).format('YYYY-MM-DD HH:mm')}`+ '\n' + 'Timezone offset: ' + moment(dt.getTime()).format('Z'))
+        .setFooter('spurwing.io');
+    } else {
+      return new Discord.MessageEmbed()
+        .setColor('#ff0033')
+        .setDescription(`Error: ${err} \nSlot: ${moment(dt.getTime()).format('YYYY-MM-DD HH:mm')}`+ '\n' + 'Timezone offset: ' + moment(dt.getTime()).format('Z'))
+        .setFooter('spurwing.io');
+    }
   }
 }
 async function fDaysAvail(cmd) {
@@ -80,10 +99,25 @@ async function fDaysAvail(cmd) {
   let dt = chrono.parseDate(cmd);
   if (!dt) return ('Unable to interpret date from: ' + cmd);
   const days = await sp.get_days_available(config.PID, APTID, dt);
-  if (days.days_available && days.days_available.length)
-    return 'Available days in ' + dt.toLocaleString('en', {month:'long'}) + ':\n\n' + days.days_available.join('\n')
-  else
-    return 'no days available in ' + dt.toLocaleString('en', {month:'long'})
+  if (days.days_available && days.days_available.length) {
+    const resp = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Days Available in '+dt.toLocaleString('en', {month:'long'})+':')
+        .setFooter('spurwing.io');
+
+    let L = days.days_available.length;
+    resp.addField('\u200B', days.days_available.slice(0, Math.floor(L/3)).join('\n'), true)
+    resp.addField('\u200B', days.days_available.slice(Math.floor(L/3), Math.floor(L/3*2)).join('\n'), true)
+    resp.addField('\u200B', days.days_available.slice(Math.floor(L/3*2)).join('\n'), true)
+    
+    return resp;
+  } else {
+    const resp = new Discord.MessageEmbed()
+        .setColor('#ffb300')
+        .setDescription('No Days Available in '+dt.toLocaleString('en', {month:'long'}))
+        .setFooter('spurwing.io');
+    return resp;
+  }
 }
 async function fSlotsAvail(cmd) {
   cmd = cmd.match(rSlotsAvail)[1];
@@ -100,10 +134,29 @@ async function fSlotsAvail(cmd) {
     tz = tz.values().next().value
   }
   const slots = await sp.get_slots_available(config.PID, APTID, dt, dt, false, tz);
-  if (slots.slots_available && slots.slots_available.length)
-    return 'available slots on '+moment(dt.getTime()).format('YYYY-MM-DD HH:mm Z') +' :\n\n' + slots.slots_available.map(x=>x.date).join('\n');
-  else
-    return 'no slots available on ' + moment(dt.getTime()).format('YYYY-MM-DD HH:mm Z');
+  if (slots.slots_available && slots.slots_available.length) {
+    const resp = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Slots Available on '+moment(dt.getTime()).format('YYYY-MM-DD')+':')
+        .setDescription('Timezone offset: ' + moment(dt.getTime()).format('Z'))
+        .setFooter('spurwing.io');
+
+        console.log(slots.slots_available)
+    slots.slots_available = slots.slots_available.map(i=>i.date.split(' ')[1].slice(0,5));
+
+    let L = slots.slots_available.length;
+    resp.addField('\u200B', slots.slots_available.slice(0, Math.floor(L/3)).join('\n'), true)
+    resp.addField('\u200B', slots.slots_available.slice(Math.floor(L/3), Math.floor(L/3*2)).join('\n'), true)
+    resp.addField('\u200B', slots.slots_available.slice(Math.floor(L/3*2)).join('\n'), true)
+    
+    return resp;
+  } else {
+    const resp = new Discord.MessageEmbed()
+        .setColor('#ffb300')
+        .setDescription('No Slots Available on '+moment(dt.getTime()).format('YYYY-MM-DD') + '\n' + 'Timezone offset: ' + moment(dt.getTime()).format('Z'))
+        .setFooter('spurwing.io');
+    return resp;
+  }
 }
 
 // mapping offsets to timezones:
