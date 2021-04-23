@@ -109,3 +109,9 @@ Bot: Would you like to schedule for next week this time?
 Another cool UX improvement to the `!book [slot] ...` command is to make return a few bookable slots if it fails to schedule for the `[slot]` you provided.
 
 Discord Bots are amazing tools that can help us **automate tasks** and be **more productive** at our daily business. If you enjoy our content, make sure to give us a star on GitHub and follow us for more. Visit [Spurwing](https://www.spurwing.io/) and schedule a free demo today. Have a great day!
+
+## Updates
+Thanks to our team member [Nabil Omi](https://www.linkedin.com/in/nabil-omi/) for suggesting Discord Embeds, we have updated the code for a better UI/UX experience:
+
+![discord bot scheduling update 1](https://user-images.githubusercontent.com/9488406/115861930-bf9da880-a433-11eb-8652-23631f294ac7.png)
+
