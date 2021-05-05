@@ -19,7 +19,7 @@ rtm.on('message', async message => {
     let args = message.text.slice(PREFIX.length).trim().split(/ +/);
     let commandName = args.shift().toLowerCase();
 
-    // commands list on message
+    // command list on message
     switch(commandName) {
         case `ping`:
             return sendMessage(message.channel, 'pong');
