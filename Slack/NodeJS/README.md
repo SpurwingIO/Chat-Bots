@@ -1,5 +1,3 @@
-# This will be updated when the bot is further in development.
-
 ## How to host this bot:
 
 ### Make sure you have NPM and Node installed on your PC!
