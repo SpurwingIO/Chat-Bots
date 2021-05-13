@@ -34,9 +34,16 @@ export default async function openTimes(message, args) {
     // This is an awful way to do this.
     for(let i = 0; i < slots.slots_available.length; i++) {
         let date = slots.slots_available[i].date.split(" ");
-        date.splice(2,1,"\n");
+        date.splice(2,1);
         dates.push(date);
-      }
+    }
+    
+    for(let i = 0; i < dates.length; i++) {
+        dates[i].push("\n");
+        dates[i] = dates[i].join(" ");
+    }
+
+    let dateString = dates.join("");
 
     let slackEmbed = {
         "blocks": [
@@ -44,7 +51,7 @@ export default async function openTimes(message, args) {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": `${dates}`
+                    "text": `${dateString}`
                 }
             }
         ]
