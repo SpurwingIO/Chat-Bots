@@ -2,7 +2,7 @@ import { RTMClient } from '@slack/rtm-api';
 require('dotenv').config();
 
 // command function imports
-import sendMessage from './core-commands/sendMessage.js';
+import { sendMessage } from './core-commands/sendMessage.js';
 import bookAppointment from './core-commands/bookAppointment.js';
 import openTimes from './core-commands/openTimes.js';
 

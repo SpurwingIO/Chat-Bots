@@ -1,5 +1,6 @@
 const Spurwing = require("spurwing");
 let sp = new Spurwing();
+import { sendEmbed } from "./sendMessage.js";
 
 const PID = process.env.PID;
 //const APIKEY = config.APIKEY;
@@ -13,15 +14,43 @@ function dateNow() {
     return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
 }
   
-function  dateTomorrow() {
+function dateLater(days) {
     let d = new Date();
-    d.setDate(d.getDate() + 1);
+    // if the amount of days is not specified return tomorrow's slots
+    if(!days || isNaN(days)) {
+        d.setDate(d.getDate() + 1);
+    }
+    else {
+        d.setDate(d.getDate() + Number(days));
+    }
     return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
 }
 
 export default async function openTimes(message, args) {
     // command to show available times.
-    const slots = await sp.get_slots_available(PID, APTID, dateNow(), dateTomorrow());
-    console.log(slots);
+    const slots = await sp.get_slots_available(PID, APTID, dateNow(), dateLater(args[0]));
+    let dates = [];
+
+    // This is an awful way to do this.
+    for(let i = 0; i < slots.slots_available.length; i++) {
+        let date = slots.slots_available[i].date.split(" ");
+        date.splice(2,1,"\n");
+        dates.push(date);
+      }
+
+    let slackEmbed = {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": `${dates}`
+                }
+            }
+        ]
+    }
+
+    sendEmbed(message.channel, slackEmbed.blocks);
+    console.log(dates);
     return;
 }
