@@ -2,10 +2,10 @@
 
 This repostitory contains demos, tutorials and frameworks for integrating Appointment scheduling and Calendar management solutions into chat bot platforms.
 
-![image](https://user-images.githubusercontent.com/9488406/119051288-47d78500-b9c3-11eb-8919-c7a4486c13ec.png)
+![image](https://user-images.githubusercontent.com/9488406/119051727-d21fe900-b9c3-11eb-9a72-53b0b869a019.png)
 
 ## Supported Chat Bots
-- [ ] Discord
+- [X] Discord
 - [ ] Slack
 - [X] Facebook Messenger
 - [ ] WhatsApp
