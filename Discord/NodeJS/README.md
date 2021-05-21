@@ -103,6 +103,7 @@ Bot: Would you like to schedule for next week this time?
 - For public issues and bugs please use the GitHub Issues Page.
 - For enquiries and private issues reach out to us at support@spurwing.io
 - Join our Discord Community Server: https://discord.gg/j3gd5Qk5uW
+- Learn more about the [Spurwing Scheduling API](https://github.com/Spurwing/Appointment-Scheduling-API).
 
 
 # Conclusion
