@@ -14,7 +14,11 @@ Example:
 !opentimes 2 -> message should contain all open time slots in the next 2 days
 \`\`\`
 
-!book <slot> <firstname> <lastname> <email> -> books an appointment from firstname lastname email on slot
+!book -d <slot> -n <firstname> <lastname> -> books an appointment from firstname lastname email on slot
+\`\`\`
+Example:
+!book -d june 1 5pm edt -n Lorem ipsum -> books an appointment from lorem ipsum on june 1 5pm edt.
+\`\`\`
                     `
                 }
             }
