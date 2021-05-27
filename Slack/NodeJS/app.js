@@ -5,6 +5,7 @@ require('dotenv').config();
 import { sendMessage } from './core-commands/sendMessage.js';
 import bookAppointment from './core-commands/bookAppointment.js';
 import openTimes from './core-commands/openTimes.js';
+import help from './core-commands/help.js';
 
 const PREFIX = process.env.PREFIX;
 
@@ -23,6 +24,8 @@ rtm.on('message', async message => {
     switch(commandName) {
         case `ping`:
             return sendMessage(message.channel, 'pong');
+        case `help`:
+            return help(message, args);
 
         // below commands are not made yet but will be implemented soon.
         case `book`:
