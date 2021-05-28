@@ -39,7 +39,8 @@ export default async function bookAppointment(message, args) {
     if(date) {
        let book =  await sp.complete_booking(process.env.PID, appointmentTypeId, "email@gmail.com", firstName, lastName, dateFormatted, "Discord Appointment")
        .catch(err => console.error(err));
-       sendMessage(message.channel, `Booked! Your appointment ID is ${book.appointment.id}`);
+       sendMessage(message.user, `Booked! Your appointment ID is ${book.appointment.id}`);
+       sendMessage(message.channel, `Booked! You should have an appointment ID in your private messages.`);
     }
     else if(!date) {
         sendMessage(message.channel, "You must specify at least a date!");
