@@ -5,6 +5,7 @@ require('dotenv').config();
 import { sendMessage } from './core-commands/sendMessage.js';
 import bookAppointment from './core-commands/bookAppointment.js';
 import openTimes from './core-commands/openTimes.js';
+import cancelAppointment from './core-commands/cancelAppointment.js';
 import help from './core-commands/help.js';
 
 const PREFIX = process.env.PREFIX;
