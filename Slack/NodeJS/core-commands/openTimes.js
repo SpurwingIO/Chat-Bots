@@ -1,6 +1,7 @@
 const Spurwing = require("spurwing");
 let sp = new Spurwing();
-import { sendEmbed } from "./sendMessage.js";
+const chrono = require("chrono-node");
+import { sendEmbed, sendMessage } from "./sendMessage.js";
 
 const PID = process.env.PID;
 //const APIKEY = config.APIKEY;
@@ -28,7 +29,17 @@ function dateLater(days) {
 
 export default async function openTimes(message, args) {
     // command to show available times.
-    const slots = await sp.get_slots_available(PID, APTID, dateNow(), dateLater(args[0]));
+    var slots;
+    if(!isNaN(args[0])) {
+        slots = await sp.get_slots_available(PID, APTID, dateNow(), dateLater(args[0]));
+    } else if(isNaN(args[0])) {
+        // chrono needs to parse a string not an array so we have to join
+        let argsString = args.join(" ");
+        let date = chrono.parseDate(argsString);
+        slots = await sp.get_slots_available(PID, APTID, date, date);
+    } else {
+        sendMessage(message.channel, "I didn't quite understand what you meant there, please try again or use !help for more information.");
+    }
     let dates = [];
 
     // This is an awful way to do this.

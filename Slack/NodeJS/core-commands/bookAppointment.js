@@ -10,7 +10,7 @@ export default async function bookAppointment(message, args) {
     argsString.shift();
     console.log(argsString);
 
-    let date, email;
+    let date;
     let firstName, lastName = "not_specified";
 
     for(let i = 0; i < argsString.length; i++) {
@@ -24,6 +24,7 @@ export default async function bookAppointment(message, args) {
             }
             console.log(firstName, lastName);
         }
+
         if(argsString[i].startsWith("d")) {
             date = argsString[i].split(" ");
             date.shift();
@@ -36,8 +37,10 @@ export default async function bookAppointment(message, args) {
     let aptTypes = await sp.get_appointment_types(process.env.PID).catch(err => console.error(err));
     let appointmentTypeId = aptTypes[0].id;
 
+
+    // if you want to add emails, please just add a regex for it in that loop above.
     if(date) {
-       let book =  await sp.complete_booking(process.env.PID, appointmentTypeId, "email@gmail.com", firstName, lastName, dateFormatted, "Discord Appointment")
+       let book =  await sp.complete_booking(process.env.PID, appointmentTypeId, "email@email.email", firstName, lastName, dateFormatted, "Discord Appointment")
        .catch(err => console.error(err));
        sendMessage(message.user, `Booked! Your appointment ID is ${book.appointment.id}`);
        sendMessage(message.channel, `Booked! You should have an appointment ID in your private messages.`);
