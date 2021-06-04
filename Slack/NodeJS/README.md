@@ -1,3 +1,7 @@
+# Slack Bot for Appointment Scheduling
+
+## Please note that this is just a demo on how to use these services. It may be updated at a later date.
+
 ## How to host this bot:
 
 ### Make sure you have NPM and Node installed on your PC!
