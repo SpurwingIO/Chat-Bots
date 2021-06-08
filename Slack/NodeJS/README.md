@@ -58,8 +58,20 @@ APIKEY="replace this" // if you have it
 
 11.   Copy the "Bot User Oauth Token".
 
-12.   Replace the `replace this` with your token, and prefix respectively.
+12.   Replace the `replace this` with your token, and prefix respectively (recommended prefix: "!").
 
 13.   Type `npm run server`.
 
 Your bot should be online. If it throws an error immediately, feel free to remove the line `sendMessage('chat-bot', 'Bot is now online.');` in app.js. This will probably break something if you do not already have a channel in your Slack with the name chat-bot.
+
+## Spurwing Integration
+
+1. Log into the Spurwing Dashboard.
+
+2. Click on the API Info tab.
+
+3. Copy the Provider ID and API Key (the API key is not mandatory but it may be useful for some functions)
+
+4. Replace the `replace this` with your credentials.
+
+5. Test the bot to see if everything worked correctly!
