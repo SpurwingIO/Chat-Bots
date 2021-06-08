@@ -19,6 +19,12 @@ This is a demo project on the integration of the Spurwing API with Slack.
 
 `!cancel [appointment id]` : Cancels an appointment based on appointment ID.
 
+## Requirements
+- NodeJS 12 or Newer
+- Spurwing Provider ID
+- Slack Classic Bot Application
+- Slack Classic Bot Token
+
 ## How to host this bot:
 
 ### Make sure you have NPM and Node installed on your PC!
@@ -39,7 +45,7 @@ This is a demo project on the integration of the Spurwing API with Slack.
 TOKEN="replace this"
 PREFIX="replace this"
 PID="replace this"
-APIKEY="replace this"
+APIKEY="replace this" // if you have it
 ```
 
 7. On the slack site, click on your bot and on the left tab, click on "App Home".
