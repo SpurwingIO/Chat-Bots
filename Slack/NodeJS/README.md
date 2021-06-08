@@ -1,5 +1,9 @@
 # Slack Bot for Appointment Scheduling
 
+## Demo
+
+![Slack bot Demo](./slackbot.gif)
+
 ## Intro
 
 This is a demo project on the integration of the Spurwing API with Slack.
