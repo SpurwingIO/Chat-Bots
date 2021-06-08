@@ -6,7 +6,7 @@ This repostitory contains demos, tutorials and frameworks for integrating Appoin
 
 ## Supported Chat Bots
 - [X] Discord
-- [ ] Slack
+- [X] Slack
 - [X] Facebook Messenger
 - [ ] WhatsApp
 - [ ] Skype
