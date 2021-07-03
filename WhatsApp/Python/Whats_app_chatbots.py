@@ -11,8 +11,8 @@ from timefhuman import timefhuman
 
 app = Flask(__name__)
 
-PID = 'b969d2e9-a2e4-42dd-88aa-d3384adaf1fa';
-KEY = 'e7dc4e2b222d55a0ae352d4de56ba5c137e78b77e4a31ee90007c4acfd02462c';
+PID = '';
+KEY = '';
 
 appointTypes = sp.get_appointment_types(PID)
 appointment_type_id = appointTypes[0]['id']
