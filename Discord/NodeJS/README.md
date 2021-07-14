@@ -50,7 +50,7 @@ These three simple commands allows Discord users to schedule simple 1-on-1 appoi
 - If you don't have a Discord Bot yet, follow step 1 of this [tutorial](https://www.digitalocean.com/community/tutorials/how-to-build-a-discord-bot-with-node-js) to obtain your bot's token and adding the bot to your Discord server.
 
 ### Installation
-1. Clone, fork or download our repository: https://github.com/Spurwing/Chat-Bot-Integrations/
+1. Clone, fork or download our repository: https://github.com/Spurwingio/Chat-Bot-Integrations/
 2. Navigate to `/Discord/NodeJS/` and execute `npm install`
 3. Copy the file `config.sample.js` to `config.js` and edit it
  - Provide your Discord Bot Token
@@ -86,12 +86,12 @@ To incorporate automated reminders, either as public announcements or private me
 ![discord bot reminder](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yl7zyrpoe2d3ogaxvv5g.png)
 
 ## Sending Emails
-We already have a Spurwing Library for sending emails using the SMTP protocol. Our [iCalendar Library Repository](https://github.com/Spurwing/iCalendar-Integrations/) contains all the logic you need inside `index.js`, in particular the `sendMail` function which you can re-use here.
+We already have a Spurwing Library for sending emails using the SMTP protocol. Our [iCalendar Library Repository](https://github.com/Spurwingio/iCalendar-Integrations/) contains all the logic you need inside `index.js`, in particular the `sendMail` function which you can re-use here.
 
 ## Voice Commands
 The thing I love about Discord the most are its voice channels. It's just a virtual place you can join and talk to everyone inside the channel. No annoying meeting links needed to instantly hop on a call with someone.
 
-A Discord Bot can also join a voice channel and listen to all speakers individually (but can also send audio data). One of my personal open-source projects [DiscordEarsBot](https://github.com/healzer/DiscordEarsBot) uses NLP and Machine Learning to transcribe and interpret what is being said. This solution is pretty accurate and supports 32 of languages. You can use that solution for adding Voice Commands or generated suggestions based on what is being said during a conversation:
+A Discord Bot can also join a voice channel and listen to all speakers individually (but can also send audio data). One of my personal open-source projects [DiscordEarsBot](https://github.com/inevolin/DiscordEarsBot) uses NLP and Machine Learning to transcribe and interpret what is being said. This solution is pretty accurate and supports 32 of languages. You can use that solution for adding Voice Commands or generated suggestions based on what is being said during a conversation:
 ```
 You: maybe we should meet again next week?
 
@@ -103,7 +103,7 @@ Bot: Would you like to schedule for next week this time?
 - For public issues and bugs please use the GitHub Issues Page.
 - For enquiries and private issues reach out to us at support@spurwing.io
 - Join our Discord Community Server: https://discord.gg/j3gd5Qk5uW
-- Learn more about the [Spurwing Scheduling API](https://github.com/Spurwing/Appointment-Scheduling-API).
+- Learn more about the [Spurwing Scheduling API](https://github.com/Spurwingio/Appointment-Scheduling-API).
 
 
 # Conclusion
