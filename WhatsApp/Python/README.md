@@ -28,3 +28,7 @@
 - Join our Discord Community Server: https://discord.gg/j3gd5Qk5uW
 
 - Learn more about the Spurwing Scheduling API.
+
+## Team Members##
+-
+-Yingfeng Lou Email: yingfengxhh@gmail.com LinkedIn: https://www.linkedin.com/in/yingfeng-lou/
