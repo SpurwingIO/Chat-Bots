@@ -77,6 +77,10 @@ Your bot should be online. If it throws an error immediately, feel free to remov
 5. Test the bot to see if everything worked correctly!
 
 
+## Known Minor Issue
+Please note that the timezone is based on where the bot is hosted. 
+
+
 ## Me
 Name: Nabil Omi
 
