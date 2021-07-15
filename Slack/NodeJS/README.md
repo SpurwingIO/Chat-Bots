@@ -75,3 +75,9 @@ Your bot should be online. If it throws an error immediately, feel free to remov
 4. Replace the `replace this` with your credentials.
 
 5. Test the bot to see if everything worked correctly!
+
+
+## Me
+Name: Nabil Omi
+E-Mail: nabilomi1@gmail.com
+LinkedIn: https://www.linkedin.com/in/nabil-omi/
