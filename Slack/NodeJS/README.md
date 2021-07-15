@@ -79,5 +79,7 @@ Your bot should be online. If it throws an error immediately, feel free to remov
 
 ## Me
 Name: Nabil Omi
+
 E-Mail: nabilomi1@gmail.com
+
 LinkedIn: https://www.linkedin.com/in/nabil-omi/
