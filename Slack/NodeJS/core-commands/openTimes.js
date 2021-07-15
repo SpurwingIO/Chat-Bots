@@ -45,7 +45,7 @@ export default async function openTimes(message, args) {
     // This is an awful way to do this.
     for(let i = 0; i < slots.slots_available.length; i++) {
         let date = slots.slots_available[i].date.split(" ");
-        date.splice(2,1);
+        //date.splice(2,1); // commented out to add in timezone stamp
         dates.push(date);
     }
     
